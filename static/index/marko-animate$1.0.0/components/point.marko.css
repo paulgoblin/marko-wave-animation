@@ -1,0 +1,5 @@
+div.point {
+    position: absolute;
+    border-radius: 50%;
+    background: purple;
+  }
