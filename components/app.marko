@@ -1,0 +1,125 @@
+static var framePeriod = Math.floor(1000/60);  // 60 frames/sec
+
+class {
+  onCreate() {
+    this.state = {
+      numPoints: 85,
+      wavelength: 100,
+      amplitude: 25,
+      period: 3500,
+      isJuicy: true,
+      isPlaying: false,
+      time: 0,
+    }
+  }
+
+  onMount() {
+    this.startAnimation();
+  }
+
+  updateWavelength() {
+    this.state.wavelength = parseInt(this.getEl('wavelengthInput').value, 10);
+  }
+  updateNumPoints() {
+    this.state.numPoints = parseInt(this.getEl('numPointsInput').value, 10)
+  }
+  updateAmplitude() {
+    this.state.amplitude = parseInt(this.getEl('amplitudeInput').value, 10)
+  }
+  updatePeriod() {
+    this.state.period = parseInt(this.getEl('periodInput').value, 10)
+  }
+  toggleJucify() {
+    console.log('JUCIFYING!')
+    this.state.isJuicy = !this.state.isJuicy;
+  }
+  startAnimation() {
+    this.state.isPlaying = true;
+
+    this.intervalId = setInterval(() => {
+      this.state.time += framePeriod;
+    }, framePeriod);
+  }
+  stopAnimation() {
+    this.state.isPlaying = false;
+
+    clearInterval(this.intervalId);
+  }
+}
+
+
+<div>
+  <h1>This is Marko!</h1>
+
+  <label for-key="numPointsInput">
+    n
+  </label>
+
+  <input type="range" max="300"
+    key="numPointsInput"
+    on-input('updateNumPoints')
+    value=state.numPoints >
+  <span>${state.numPoints}</span>
+
+  <br />
+
+  <label for-key="wavelengthInput">
+    λ
+  </label>
+
+  <input type="range" max="200" min="1"
+    key="wavelengthInput"
+    on-input('updateWavelength')
+    value=state.wavelength >
+  <span>${state.wavelength/100}</span>
+
+  <br />
+
+  <label for-key="amplitudeInput">
+    A
+  </label>
+
+  <input type="range" max="50" min="-50"
+    key="amplitudeInput"
+    on-input('updateAmplitude')
+    value=state.amplitude >
+  <span>${state.amplitude/50}</span>
+
+  <br />
+
+  <label for-key="amplitudeInput">
+    T
+  </label>
+
+  <input type="range" max="5000" min="0" step="10"
+    key="periodInput"
+    on-input('updatePeriod')
+    value=state.period >
+  <span>${state.period/1000}</span>
+
+  <br />
+
+  <label>Jucify</label>
+  <button on-click('toggleJucify')>
+    <span if(state.isJuicy)>✔</span>
+  </button>
+
+  <br />
+
+  <button on-click("startAnimation") disabled=(state.isPlaying)>
+    Start
+  </button>
+
+  <button on-click("stopAnimation") disabled=(!state.isPlaying)>
+    Stop
+  </button>
+
+  <sin-animation
+    numPoints=state.numPoints
+    wavelength=state.wavelength
+    amplitude=state.amplitude
+    period=state.period
+    time=state.time
+    isJuicy=state.isJuicy
+  />
+</div>

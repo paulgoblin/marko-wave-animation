@@ -1,0 +1,22 @@
+style {
+  div.container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow-x: hidden;
+  }
+}
+
+<div.container>
+  <for(var i=0; i <= input.numPoints; i++)>
+    <point({
+      index: i,
+      numPoints: input.numPoints,
+      wavelength: input.wavelength/100,
+      amplitude: input.amplitude,
+      period: input.period,
+      time: input.time,
+      isJuicy: input.isJuicy,
+    })/>
+  </for>
+</div>

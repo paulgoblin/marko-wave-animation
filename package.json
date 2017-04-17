@@ -1,0 +1,16 @@
+{
+  "name": "marko-animate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "lasso --main client.js --plugins lasso-marko --inject-into index.html --development --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lasso-marko": "^2.3.0",
+    "marko": "^4.2.8"
+  }
+}
